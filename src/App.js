@@ -1,23 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import Buttons from './components/buttons.jsx';
+import Counter from './components/counter.jsx';
+import { useState } from 'react';
+
+//We have to use useState to create a hook which will assign a state to our buttons being clicked.
 
 function App() {
+  //The first element is the value we want to use as a state
+  //The second element is the function which allow us to update
+  const [count, setCount] = useState(0); //The first parameter on useState() is the initial value it will have
+
+  const handleClick = () => {
+    setCount(count + 1); //We call the function and specify what will it have to do
+  };
+
+  const handleReset = () => {
+    setCount(0);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='main-container'>
+        <Counter
+          count={count}
+        />
+        <Buttons
+          text="Click me!"
+          isAClickable={true}
+          handleClick={handleClick}
+        />
+        <Buttons
+          text="Reset"
+          isAClickable={false}
+          handleClick={handleReset}
+        />
+      </div>
     </div>
   );
 }
